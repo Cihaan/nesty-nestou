@@ -1,4 +1,5 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Investment } from '../investments/investment.entity';
 import { Project } from '../projects/project.entity';
 
 export enum UserRole {
@@ -29,4 +30,7 @@ export class User {
 
   @OneToMany(() => Project, (project) => project.owner)
   projects: Project[];
+
+  @OneToMany(() => Investment, (investment) => investment.investor)
+  investments: Investment[];
 }

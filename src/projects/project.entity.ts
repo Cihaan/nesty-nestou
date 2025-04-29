@@ -1,4 +1,11 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Investment } from '../investments/investment.entity';
 import { User } from '../users/user.entity';
 
 @Entity()
@@ -23,4 +30,10 @@ export class Project {
 
   @ManyToOne(() => User, (user) => user.projects)
   owner: User;
+
+  @Column({ default: true })
+  isOpenForInvestment: boolean;
+
+  @OneToMany(() => Investment, 'project')
+  investments: Investment[];
 }
